@@ -1,0 +1,4 @@
+[submodule "mqp-qiskit-provider"]
+	path = external/mqp-qiskit-provider
+	url = git@github.com:Munich-Quantum-Software-Stack/MQP-Qiskit-Provider.git
+	branch = develop
