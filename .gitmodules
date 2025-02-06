@@ -2,3 +2,7 @@
 	path = external/mqp-qiskit-provider
 	url = git@github.com:Munich-Quantum-Software-Stack/MQP-Qiskit-Provider.git
 	branch = develop
+[submodule "mqp-cudaq-provider"]
+	path = external/mqp-cudaq-provider
+	url = git@github.com:Munich-Quantum-Software-Stack/MQP-CUDAQ-Provider.git
+	branch = develop
