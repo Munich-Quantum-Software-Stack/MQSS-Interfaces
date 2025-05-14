@@ -9,3 +9,5 @@ plugins:
 - jekyll-remote-theme
 title: MQSS Interfaces
 description: Documentation for Munich Quantum Software Stack interfaces
+
+markdown: kramdown
