@@ -1,1 +1,1 @@
-# MQSS-Adapters
+# MQSS-Interfaces
