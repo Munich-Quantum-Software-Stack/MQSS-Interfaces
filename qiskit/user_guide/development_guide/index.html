@@ -425,9 +425,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#publishing-documentation-on-github-pages" class="md-nav__link">
+  <a href="#building-documentation" class="md-nav__link">
     <span class="md-ellipsis">
-      Publishing Documentation on GitHub Pages
+      Building Documentation
     </span>
   </a>
   
@@ -670,9 +670,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#publishing-documentation-on-github-pages" class="md-nav__link">
+  <a href="#building-documentation" class="md-nav__link">
     <span class="md-ellipsis">
-      Publishing Documentation on GitHub Pages
+      Building Documentation
     </span>
   </a>
   
@@ -711,7 +711,7 @@ Qiskit. The main components of the project are:</p>
 <h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <p>Before you start developing, ensure you have the following installed:</p>
 <ul>
-<li>Python 3.8 to 3.11</li>
+<li>Python 3.9 to 3.13</li>
 <li><a href="https://docs.astral.sh/uv/"><code>uv</code></a> package manager for python</li>
 </ul>
 <h2 id="setting-up-the-development-environment">Setting Up the Development Environment<a class="headerlink" href="#setting-up-the-development-environment" title="Permanent link">&para;</a></h2>
@@ -726,24 +726,19 @@ Qiskit. The main components of the project are:</p>
 <p>To run the tests, use <code>pytest</code>:</p>
 <div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>pytest
 </code></pre></div>
-<h2 id="publishing-documentation-on-github-pages">Publishing Documentation on GitHub Pages<a class="headerlink" href="#publishing-documentation-on-github-pages" title="Permanent link">&para;</a></h2>
-<p>To publish the documentation on GitHub Pages, follow these steps:</p>
+<h2 id="building-documentation">Building Documentation<a class="headerlink" href="#building-documentation" title="Permanent link">&para;</a></h2>
+<p>To build the documentation, follow these steps:</p>
 <p><strong>Install MkDocs and the Material theme:</strong></p>
 <div class="highlight"><pre><span></span><code>uv<span class="w"> </span>sync
 </code></pre></div>
 <p><strong>Build the documentation:</strong></p>
 <div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>mkdocs<span class="w"> </span>build
 </code></pre></div>
-<p><strong>View documentation locally</strong></p>
+<p><strong>Local deployment</strong></p>
 <p>Run the following and browse the documentation locally at:
 <a href="http://localhost:8000">http://localhost:8000</a></p>
 <div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>mkdocs<span class="w"> </span>serve
 </code></pre></div>
-<p><strong>Deploy the documentation to GitHub Pages:</strong></p>
-<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>mkdocs<span class="w"> </span>gh-deploy<span class="w"> </span>--remote-name<span class="w"> </span>git@github.com:Munich-Quantum-Software-Stack/MQSS-Qiskit-Adapter.git<span class="w"> </span>--remote-branch<span class="w"> </span>gh-pages
-</code></pre></div>
-<p>This will create a new branch named <code>gh-pages</code> in your repository and deploy the documentation to
-GitHub Pages.</p>
 
 
 
