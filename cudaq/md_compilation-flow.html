@@ -261,42 +261,40 @@ $(function(){initNavTree('md_compilation-flow.html',''); initResizable(true); })
 <h1>Compiling using the MQSS CUDA-Q Adapter</h1>
 <ul>
 <li><p class="startli">To target MQSS via <b>MQP</b> (REST API)</p>
-<div class="fragment"><div class="line">nvq++ --target mqssMQP source.cpp</div>
+<div class="fragment"><div class="line">nvq++ --target mqssMQP your_application_source.cpp -o your_binary_application</div>
 </div><!-- fragment --></li>
-<li><p class="startli">To target MQSS via <b>HPC</b></p>
-<div class="fragment"><div class="line">nvq++ --target mqssHPC source.cpp</div>
+<li><p class="startli">To target MQSS via <b>HPC</b> (coming soon, not supported yet by the MQSS v1)</p>
+<div class="fragment"><div class="line">nvq++ --target mqssHPC your_application_source.cpp -o your_binary_application</div>
 </div><!-- fragment --></li>
 </ul>
-<h1>Configuration File</h1>
+<h1>Executing your with Configuration File and Credentials</h1>
+<p>Once the binary of your application was successfully generated. You can execute your application to submit quantum circuits to the MQSS, as follows:</p>
+<div class="fragment"><div class="line">MQSS_MQP_TOKEN=your/token/file/path CUDAQ_MQSS_CONFIGURATION=/your/configuration/file/path ./your_binary_application</div>
+</div><!-- fragment --><p>The environment variable <code>MQSS_MQP_TOKEN</code> is used to specify the path of a text file containing a token to access to the MQP. To generate a valid token please go to the <a href="https://portal.quantum.lrz.de/">Munich Quantum Portal (MQP)</a>.</p>
 <p>A configuration file is a requirement to send additional information to be used at runtime by the MQSS.</p>
-<p>The environment variable <code>CUDAQ_MQSS_CONFIGURATION</code> has to be defined in order to include the configuration file during compilation</p>
-<div class="fragment"><div class="line">export CUDAQ_MQSS_CONFIGURATION=$HOME/.mqss_config</div>
-</div><!-- fragment --><p>The configuration file might contain the following information:</p>
+<p>The environment variable <code>CUDAQ_MQSS_CONFIGURATION</code> has to be defined in order to include the configuration file during runtime.</p>
+<p>The configuration file might contain the following information:</p>
 <ul>
-<li><code>n_qbits</code> is the number of qubits required by the submitted task.</li>
 <li><code>n_shots</code> is the number of shots required to execute the quantum task. This is annotated by MQSS CUDA-Q Adapter and it is not required to be defined in the configuration file.</li>
 <li><code>transpiler_flag</code> is a flag indicating if the MQSS has to perform transpilation. <code>true</code> indicates the flag is active, <code>false</code> otherwise.</li>
-<li><code>circuit_files</code> is a list with the circuit files.</li>
-<li><code>submit_time</code> is the submission time of the task. This is an notated by MQSS CUDA-Q Adapter on each submitted task and it is not required to be defined in the configuration file.</li>
-<li><code>circuit_file_type</code> is the circuit type submitted to the MQSS. The supported file types at the moment are: QASM, Quake, and QIR.</li>
+<li><code>submit_time</code> is the submission time of the task. This is annotated by MQSS CUDA-Q Adapter on each submitted task and it is not required to be defined in the configuration file.</li>
+<li><code>circuit_file_type</code> is the circuit type submitted to the MQSS. The supported file types at the moment are: QASMi, Quake, and QIR.</li>
 <li><code>preferred_qpu</code> specifies the selected preferred QPU where the submitted jobs will be executed.</li>
 <li><code>restricted_resource_names</code> specifies the restricted QPUs when submitting a job the MQSS.</li>
 <li><code>priority</code> integer value that specified the priority level of the submitted.</li>
 <li><code>user_identity</code> specifies the identity of the user.</li>
 <li><code>optimisation_level</code> specifies the optimization level. Supported levels: 0, 1, 2, and 3.</li>
-<li><code>via_hpc</code> is a flag specifying if the job is submitted via HPC or MQP. <code>true</code> indicates the job is submitted via HPC, <code>false</code> via MQP.</li>
+<li><code>via_hpc</code> is a flag specifying if the job is submitted via HPC or MQP. <code>true</code> indicates the job is submitted via HPC, <code>false</code> via MQP. This is annotated by MQSS CUDA-Q Adapter on each submitted task and it is not required to be defined in the configuration file.</li>
 </ul>
 <p>In the following an example of a configuration file:</p>
-<div class="fragment"><div class="line">n_qbits: 5</div>
-<div class="line">n_shots: 1000</div>
+<div class="fragment"><div class="line">n_shots: 1000</div>
 <div class="line">transpiler_flag: true</div>
-<div class="line">circuit_file_type: quake</div>
-<div class="line">preferred_qpu: iqm</div>
-<div class="line">restricted_resource_names: aqt</div>
+<div class="line">circuit_file_type: qasm</div>
+<div class="line">preferred_qpu: QExa20</div>
+<div class="line">restricted_resource_names: AQT20</div>
 <div class="line">priority: 1</div>
 <div class="line">user_identity: YOUR IDENTITY</div>
 <div class="line">optimisation_level: 3</div>
-<div class="line">via_hpc: false</div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

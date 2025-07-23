@@ -231,38 +231,23 @@ $(function(){initNavTree('md_guide.html',''); initResizable(true); });
 </ul>
 <p>The previous steps creates an isolated environment where you can tests this project. The project is located:</p>
 <div class="fragment"><div class="line">cd /workspaces/MQSS-CUDAQ-Adapter</div>
-</div><!-- fragment --><h2>Configure and Build</h2>
+</div><!-- fragment --><h2>Build and install</h2>
 <p>Building the project requires a C++ compiler supporting <em>C11</em> and a minimum CMake version of <em>3.19</em>. The example devices and the tests require a C++ compiler supporting <em>C++17</em> and <em>C++20</em> dialects.</p>
-<p>The MQSS CUDA-Q Adapter uses CMake as its build system. However, we provide an script <code>build.sh</code> that first builds the required Cuda-Q libraries. Then, the script builds the MQSS CUDA-Q Adapter project. You can configure and build the project as follows:</p>
-<div class="fragment"><div class="line">bash build.sh --jobs 5 --debug --mlir-dir &quot;dir-to-mlir&quot; --clang-dir &quot;dir-to-clang&quot;</div>
-<div class="line">              --llvm-dir &quot;dir-to-llvm&quot; --build-tests --build-docs</div>
+<p>The script <code>generate_and_apply_patch.sh</code> clone the source code of CUDA-Q and fetch also the MQSS CUDA-Q Adapter. You need to rebuild the entire CUDA-Q and install. After this the CUDA-Q compiler will show <code>mqMQP</code> when running <code>nvq++ --list-targets</code>.</p>
+<div class="fragment"><div class="line">bash build.sh --jobs 5</div>
 </div><!-- fragment --><p>In the following, we describe each of the arguments accepted by <code>build.sh</code>.</p>
 <ul>
 <li><code>--jobs</code> (<b>optional</b>) The number of jobs utilized to configure and compile this project. If not specified, a single job is used to compile the project.</li>
-<li><code>--debug</code> (<b>optional</b>) Used to show debug information. If you want to build the project without debug information, do not include it.</li>
 <li><code>--mlir-dir</code> Path of your MLIR installation. E.g., <code>/opt/llvm/lib/cmake/mlir/</code></li>
 <li><code>--clang-dir</code> Path of your Clang installation.</li>
 <li><code>--llvm-dir</code> Path of your LLVM installation.</li>
-<li><code>--build-tests</code> (<b>optional</b>) Include it if you want to build the tests of this project.</li>
-<li><code>--build-docs</code> (<b>optional</b>) Include it if you want to build this documentation.</li>
-</ul>
-<h2>Installing</h2>
-<p>To install the MQSS CUDA-Q Adapter into your local CUDA-Q installation, you have to run the following script:</p>
-<div class="fragment"><div class="line">bash MQSS-CUDA-Q-Adapter-install.sh --cudaq-install-dir &quot;dir-to-your-cudaq-local-installation&quot;</div>
-</div><!-- fragment --><ul>
-<li><code>--cudaq-install-dir</code> Path of your local CUDA-Q installation. E.g., <code>/usr/local/cudaq</code>.</li>
 </ul>
 <p>After the installation you can verify if the installation was successful, by running the following script:</p>
 <div class="fragment"><div class="line">nvq++ --list-targets</div>
 <div class="line">  ...</div>
-<div class="line">  mqssHPC</div>
 <div class="line">  mqssMQP</div>
 <div class="line">  ...</div>
-</div><!-- fragment --><p>You can see listed the targets <code>mqssHPC</code> and <code>mqssMQP</code> corresponding to the HPC and MQP access to the MQSS, respectively.</p>
-<h2>Running Tests</h2>
-<p>We use the <a href="https://google.github.io/googletest/primer.html">GoogleTest</a> framework for unit testing the MQP and HPC access to the MQSS using the MQSS CUDA-Q Adapter. All tests are contained in the <code>test</code> directory. You can configure and build the project using CMake as follows:</p>
-<div class="fragment"><div class="line">bash build.sh --build-tests</div>
-</div><!-- fragment --><p>The executables used to run the tests can be found at <code>build/tests/</code>.</p>
+</div><!-- fragment --><p>You can see listed the targets <code>mqssMQP</code> corresponding to the MQP access to the MQSS.</p>
 <h2>Format for Comments</h2>
 <p>For the information to be displayed correctly in the documentation, it is essential that the comments follow the format required by Doxygen. Below you find some tags, that are commonly used within the documentation of a function:</p>
 <ul>
@@ -275,8 +260,8 @@ $(function(){initNavTree('md_guide.html',''); initResizable(true); });
 <h1>Working on the Documentation</h1>
 <p>The documentation is generated using <a href="https://www.doxygen.nl/index.html">Doxygen</a>, which is seamlessly integrated into the CMake build system.</p>
 <h2>Building the Documentation</h2>
-<p>The documentation can be built configuring the CMake as follows:</p>
-<div class="fragment"><div class="line">bash build.sh --build-docs</div>
+<p>The documentation can be built using the <code>build_doc.sh</code> script.</p>
+<div class="fragment"><div class="line">bash build_doc.sh --build-docs</div>
 </div><!-- fragment --><p>The generated webpage can be inspected by opening the file in <code>docs/html/index.html</code> in the CMake build directory.</p>
 <h2>Static Content</h2>
 <p>The generated webpage also contains four static sites, namely the main page, the support page, the FAQ page, and this development guide. The respective markdown files that serve as the source for those sites are contained in <code>docs/</code> where <code>index.md</code> contains the content of the main page.</p>
