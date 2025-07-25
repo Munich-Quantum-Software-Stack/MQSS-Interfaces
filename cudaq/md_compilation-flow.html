@@ -267,7 +267,7 @@ $(function(){initNavTree('md_compilation-flow.html',''); initResizable(true); })
 <div class="fragment"><div class="line">nvq++ --target mqssHPC your_application_source.cpp -o your_binary_application</div>
 </div><!-- fragment --></li>
 </ul>
-<h1>Executing your with Configuration File and Credentials</h1>
+<h1>Executing your Application with Configuration File and Credentials</h1>
 <p>Once the binary of your application was successfully generated. You can execute your application to submit quantum circuits to the MQSS, as follows:</p>
 <div class="fragment"><div class="line">MQSS_MQP_TOKEN=your/token/file/path CUDAQ_MQSS_CONFIGURATION=/your/configuration/file/path ./your_binary_application</div>
 </div><!-- fragment --><p>The environment variable <code>MQSS_MQP_TOKEN</code> is used to specify the path of a text file containing a token to access to the MQP. To generate a valid token please go to the <a href="https://portal.quantum.lrz.de/">Munich Quantum Portal (MQP)</a>.</p>
