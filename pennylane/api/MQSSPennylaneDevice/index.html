@@ -526,6 +526,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#mqss.pennylane_adapter.device.MQSSPennylaneDevice.determine_measurement_type" class="md-nav__link">
+    <span class="md-ellipsis">
+      determine_measurement_type
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#mqss.pennylane_adapter.device.MQSSPennylaneDevice.execute" class="md-nav__link">
     <span class="md-ellipsis">
       execute
@@ -547,6 +556,15 @@
   <a href="#mqss.pennylane_adapter.device.MQSSPennylaneDevice.get_expectation_value" class="md-nav__link">
     <span class="md-ellipsis">
       get_expectation_value
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mqss.pennylane_adapter.device.MQSSPennylaneDevice.reverse_bit_order" class="md-nav__link">
+    <span class="md-ellipsis">
+      reverse_bit_order
     </span>
   </a>
   
@@ -728,6 +746,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#mqss.pennylane_adapter.device.MQSSPennylaneDevice.determine_measurement_type" class="md-nav__link">
+    <span class="md-ellipsis">
+      determine_measurement_type
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#mqss.pennylane_adapter.device.MQSSPennylaneDevice.execute" class="md-nav__link">
     <span class="md-ellipsis">
       execute
@@ -749,6 +776,15 @@
   <a href="#mqss.pennylane_adapter.device.MQSSPennylaneDevice.get_expectation_value" class="md-nav__link">
     <span class="md-ellipsis">
       get_expectation_value
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mqss.pennylane_adapter.device.MQSSPennylaneDevice.reverse_bit_order" class="md-nav__link">
+    <span class="md-ellipsis">
+      reverse_bit_order
     </span>
   </a>
   
@@ -832,7 +868,7 @@ execute(self, circuits, execution_config, shots):
 
 
 <a href="#mqss.pennylane_adapter.device.MQSSPennylaneDevice.__init__" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__init__</span><span class="p">(</span><span class="nf">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">backends</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">supports_derivatives</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__init__</span><span class="p">(</span><span class="nf">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">backends</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">supports_derivatives</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -908,11 +944,11 @@ execute(self, circuits, execution_config, shots):
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Number of shots, for expectation values leave it as None. Defaults to None.</p>
+                <p>Legacy attribute for number of shots. Now, shots attribute is expected at the QNode level, but this attribute stays as a legacy fallback option. Defaults to 1024.</p>
               </div>
             </td>
             <td>
-                  <code>None</code>
+                  <code>1024</code>
             </td>
           </tr>
           <tr class="doc-section-item">
@@ -1047,7 +1083,7 @@ execute(self, circuits, execution_config, shots):
 
 
 <a href="#mqss.pennylane_adapter.device.MQSSPennylaneDevice.calculate_measurement_type" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">calculate_measurement_type</span><span class="p">(</span><span class="n">counts</span><span class="p">:</span> <span class="n">TensorLike</span><span class="p">,</span> <span class="n">circuits</span><span class="p">:</span> <span class="n">QuantumScriptOrBatch</span><span class="p">,</span> <span class="n">shots</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">is_hamiltonian</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">TensorLike</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">calculate_measurement_type</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">circuits</span><span class="p">:</span> <span class="n">QuantumScriptOrBatch</span><span class="p">,</span> <span class="n">shots</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">is_hamiltonian</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">TensorLike</span><span class="p">],</span> <span class="n">Union</span><span class="p">[</span><span class="n">TensorLike</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]]]</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1146,7 +1182,7 @@ execute(self, circuits, execution_config, shots):
 
 
 <a href="#mqss.pennylane_adapter.device.MQSSPennylaneDevice.create_batch_circuits_for_hamiltonians" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">create_batch_circuits_for_hamiltonians</span><span class="p">(</span><span class="n">tape</span><span class="p">:</span> <span class="n">QuantumScriptOrBatch</span><span class="p">,</span> <span class="n">is_hamiltonian</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">QuantumScriptOrBatch</span><span class="p">]</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">create_batch_circuits_for_hamiltonians</span><span class="p">(</span><span class="n">circuit</span><span class="p">:</span> <span class="n">QuantumScriptOrBatch</span><span class="p">,</span> <span class="n">is_hamiltonian</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">QuantumScriptOrBatch</span><span class="p">],</span> <span class="n">QuantumScriptOrBatch</span><span class="p">]</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1167,7 +1203,7 @@ execute(self, circuits, execution_config, shots):
       <tbody>
           <tr class="doc-section-item">
             <td>
-                <code>tape</code>
+                <code>circuit</code>
             </td>
             <td>
                   <code><span title="pennylane.tape.QuantumScriptOrBatch">QuantumScriptOrBatch</span></code>
@@ -1212,11 +1248,85 @@ execute(self, circuits, execution_config, shots):
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><span title="list">list</span>[<span title="pennylane.tape.QuantumScriptOrBatch">QuantumScriptOrBatch</span>]</code>
+                  <code><span title="typing.Union">Union</span>[<span title="list">list</span>[<span title="pennylane.tape.QuantumScriptOrBatch">QuantumScriptOrBatch</span>], <span title="pennylane.tape.QuantumScriptOrBatch">QuantumScriptOrBatch</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
                 <p>list[QuantumScriptOrBatch]: Batch of circuits for each term in the Hamiltonian</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="mqss.pennylane_adapter.device.MQSSPennylaneDevice.determine_measurement_type" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">determine_measurement_type</span>
+
+
+<a href="#mqss.pennylane_adapter.device.MQSSPennylaneDevice.determine_measurement_type" class="headerlink" title="Permanent link">&para;</a></h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">determine_measurement_type</span><span class="p">(</span><span class="n">circuit</span><span class="p">:</span> <span class="n">QuantumScriptOrBatch</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MeasurementType</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Determines the measurement type of the given tape.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>tape</code>
+            </td>
+            <td>
+                  <code><span title="pennylane.tape.QuantumScriptOrBatch">QuantumScriptOrBatch</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Pennylane circuit</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>MeasurementType</code></td>            <td>
+                  <code><span title="mqss.pennylane_adapter.device.MeasurementType">MeasurementType</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The type of measurement in the tape</p>
               </div>
             </td>
           </tr>
@@ -1236,7 +1346,7 @@ execute(self, circuits, execution_config, shots):
 
 
 <a href="#mqss.pennylane_adapter.device.MQSSPennylaneDevice.execute" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">execute</span><span class="p">(</span><span class="n">circuits</span><span class="p">:</span> <span class="n">QuantumScriptOrBatch</span><span class="p">,</span> <span class="n">execution_config</span><span class="p">:</span> <span class="n">DefaultExecutionConfig</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TensorLike</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">execute</span><span class="p">(</span><span class="n">circuits</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">QuantumScriptOrBatch</span><span class="p">]</span> <span class="o">|</span> <span class="n">QuantumScriptOrBatch</span><span class="p">,</span> <span class="n">execution_config</span><span class="p">:</span> <span class="n">ExecutionConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TensorLike</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1276,7 +1386,7 @@ execute(self, circuits, execution_config, shots):
                 <code>execution_config</code>
             </td>
             <td>
-                  <code><span title="pennylane.devices.DefaultExecutionConfig">DefaultExecutionConfig</span></code>
+                  <code><span title="pennylane.devices.ExecutionConfig">ExecutionConfig</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1285,22 +1395,6 @@ execute(self, circuits, execution_config, shots):
             </td>
             <td>
                 <em>required</em>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td>
-                <code>shots</code>
-            </td>
-            <td>
-                  <code><span title="int">int</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Number of shots. Defaults to 1024.</p>
-              </div>
-            </td>
-            <td>
-                  <code>1024</code>
             </td>
           </tr>
       </tbody>
@@ -1342,7 +1436,7 @@ execute(self, circuits, execution_config, shots):
 
 
 <a href="#mqss.pennylane_adapter.device.MQSSPennylaneDevice.fetch_counts" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">fetch_counts</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Result</span><span class="p">,</span> <span class="n">ResultBatch</span><span class="p">],</span> <span class="n">shots</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Result</span><span class="p">]</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">fetch_counts</span><span class="p">(</span><span class="n">counts</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]],</span> <span class="n">shots</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]]</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1432,7 +1526,7 @@ execute(self, circuits, execution_config, shots):
 
 
 <a href="#mqss.pennylane_adapter.device.MQSSPennylaneDevice.get_expectation_value" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_expectation_value</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">measured_qubits</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">num_qubits</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">shots</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_expectation_value</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">measured_qubits</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">num_qubits</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">shots</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1472,7 +1566,7 @@ execute(self, circuits, execution_config, shots):
                 <code>measured_qubits</code>
             </td>
             <td>
-                  <code><span title="list">list</span>[<span title="int">int</span>]</code>
+                  <code><span title="tuple">tuple</span>[<span title="int">int</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1535,6 +1629,82 @@ execute(self, circuits, execution_config, shots):
             <td>
               <div class="doc-md-description">
                 <p>Raised in case of the number of wires missing</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="mqss.pennylane_adapter.device.MQSSPennylaneDevice.reverse_bit_order" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">reverse_bit_order</span>
+
+
+<a href="#mqss.pennylane_adapter.device.MQSSPennylaneDevice.reverse_bit_order" class="headerlink" title="Permanent link">&para;</a></h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">reverse_bit_order</span><span class="p">(</span><span class="n">counts</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Reverse the order of bits in a bitstring.
+Pennylane uses big-endian ending which contradicts with Qiskit's little-endian ordering, so we need to reverse the bit order when converting between the two formats.
+This function takes a bitstring as input and returns the reversed bitstring.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>counts</code>
+            </td>
+            <td>
+                  <code><span title="dict">dict</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The counts dictionary whose input bitstrings is to be reversed.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>dict</code></td>            <td>
+                  <code><span title="dict">dict</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The reversed bitstring.</p>
               </div>
             </td>
           </tr>

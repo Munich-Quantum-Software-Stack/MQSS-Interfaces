@@ -366,9 +366,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
+  <a href="#job-submission-with-different-measurement-types" class="md-nav__link">
     <span class="md-ellipsis">
-      🚀 Usage
+      🚀 Job Submission with different measurement types
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inspecting-the-quantum-circuit" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧪 Inspecting the Quantum Circuit
     </span>
   </a>
   
@@ -617,9 +626,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
+  <a href="#job-submission-with-different-measurement-types" class="md-nav__link">
     <span class="md-ellipsis">
-      🚀 Usage
+      🚀 Job Submission with different measurement types
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inspecting-the-quantum-circuit" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧪 Inspecting the Quantum Circuit
     </span>
   </a>
   
@@ -661,12 +679,12 @@
 
 <h1 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h1>
 <p>This repository implements a custom PennyLane backend called MQSSPennylaneDevice, which is able to send quantum jobs to LRZ's infrastructure using the <a href="https://pennylane.ai">PennyLane</a> frontend. 
-The users would be able to use various PennyLane functions (<a href="https://docs.pennylane.ai/en/stable/introduction/operations.html">executing circuits</a>, <a href="https://docs.pennylane.ai/en/stable/introduction/measurements.html">different measurement types</a>. For future releases: circuit optimization and Quantum Machine Learning) while running their jobs on <a href="https://portal.quantum.lrz.de">LRZ's Quantum Hardware</a>.</p>
+The users would be able to use various PennyLane functions, such as <a href="https://docs.pennylane.ai/en/stable/introduction/operations.html">executing circuits</a> and <a href="https://docs.pennylane.ai/en/stable/introduction/measurements.html">different measurement types</a>, while running their jobs on <a href="https://portal.quantum.lrz.de">LRZ's Quantum Hardware</a>. Support for circuit optimization and Quantum Machine Learning is planned for future releases.</p>
 <h2 id="installation">🛠️ Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <p>To install the package, simply run 
 <div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>mqss-pennylane-adapter
 </code></pre></div></p>
-<h2 id="usage">🚀 Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<h2 id="job-submission-with-different-measurement-types">🚀 Job Submission with different measurement types<a class="headerlink" href="#job-submission-with-different-measurement-types" title="Permanent link">&para;</a></h2>
 <p>MQSS PennyLane Provider has support for most of the native PennyLane features. For instance, you can define a quantum circuit using PennyLane quantum gates, and decorate the method with the MQSSPennylaneDevice object. Parametric gates can also be used. 
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pennylane</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">qml</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pennylane</span><span class="w"> </span><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
@@ -674,25 +692,23 @@ The users would be able to use various PennyLane functions (<a href="https://doc
 
 <span class="n">dev</span> <span class="o">=</span> <span class="n">MQSSPennylaneDevice</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="n">MQSS_TOKEN</span><span class="p">,</span> <span class="n">backends</span><span class="o">=</span><span class="n">MQSS_BACKENDS</span><span class="p">)</span>
 
-<span class="nd">@qml</span><span class="o">.</span><span class="n">qnode</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span>
+<span class="nd">@qml</span><span class="o">.</span><span class="n">qnode</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span> <span class="n">shots</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">quantum_function_expval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    The function `quantum_function_expval` applies quantum operations RZ, CNOT, and RY to qubits and returns</span>
-<span class="sd">    the expectation value of PauliZ on the second qubit.</span>
+<span class="sd">    Defines an arbitrary mock quantum circuit for testing purposes, with an expectation value measurement</span>
 
-<span class="sd">    :param x: The parameter `x` in the `quantum_function_expval` represents the angle for the rotation gate</span>
+<span class="sd">    :param x: The parameter `x` represents the angle for the rotation gate</span>
 <span class="sd">    `RZ` applied on the qubit at wire 0</span>
-<span class="sd">    :param y: The parameter `y` in the `quantum_function_expval` function is used as the angle parameter for</span>
-<span class="sd">    the rotation gate `RY(y, wires=1)`. This gate applies a rotation around the y-axis of the Bloch</span>
-<span class="sd">    sphere by an angle `y` to the qubit on wire</span>
-<span class="sd">    :return: The function `quantum_function_expval` returns the expected value of the given operator</span>
+<span class="sd">    :param y: The parameter `y` represents the angle parameter for</span>
+<span class="sd">    the rotation gate `RY` at wire 1.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">qml</span><span class="o">.</span><span class="n">RZ</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">qml</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
     <span class="n">qml</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">qml</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
     <span class="n">qml</span><span class="o">.</span><span class="n">RX</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">qml</span><span class="o">.</span><span class="n">expval</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">PauliX</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">@</span> <span class="n">qml</span><span class="o">.</span><span class="n">PauliZ</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">qml</span><span class="o">.</span><span class="n">expval</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">PauliX</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">@</span> <span class="n">qml</span><span class="o">.</span><span class="n">PauliZ</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># Here, qubits 0 and 1 are being measured, in bases X and Z, respectively. </span>
+
 <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">17</span><span class="p">]</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">quantum_function_expval</span><span class="p">(</span><span class="o">*</span><span class="n">params</span><span class="p">)</span>
 </code></pre></div>
@@ -702,39 +718,13 @@ Furthermore, you can define a Hamiltonian object within PennyLane, and calculate
 <span class="kn">from</span><span class="w"> </span><span class="nn">mqss.pennylane_adapter.device</span><span class="w"> </span><span class="kn">import</span> <span class="n">MQSSPennylaneDevice</span>
 <span class="n">dev_hamiltonian</span> <span class="o">=</span> <span class="n">MQSSPennylaneDevice</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s1">&#39;&lt;MQSS_TOKEN&gt;&#39;</span><span class="p">,</span> <span class="n">backends</span><span class="o">=</span><span class="s1">&#39;&lt;MQSS_BACKENDS&gt;&#39;</span><span class="p">)</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">arbitrary_quantum_circuit</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Defines an arbitrary mock quantum circuit for testing purposes, without a measurement operation</span>
-
-<span class="sd">    :param x: The parameter `x` in the `quantum_function_expval` represents the angle for the rotation gate</span>
-<span class="sd">    `RZ` applied on the qubit at wire 0</span>
-<span class="sd">    :param y: The parameter `y` in the `quantum_function_expval` function is used as the angle parameter for</span>
-<span class="sd">    the rotation gate `RY(y, wires=1)`. This gate applies a rotation around the y-axis of the Bloch</span>
-<span class="sd">    sphere by an angle `y` to the qubit on wire</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">qml</span><span class="o">.</span><span class="n">RZ</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">qml</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-    <span class="n">qml</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">qml</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-    <span class="n">qml</span><span class="o">.</span><span class="n">RX</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="nd">@qml</span><span class="o">.</span><span class="n">qnode</span><span class="p">(</span><span class="n">dev_hamiltonian</span><span class="p">)</span>
+<span class="nd">@qml</span><span class="o">.</span><span class="n">qnode</span><span class="p">(</span><span class="n">dev_hamiltonian</span><span class="p">,</span> <span class="n">shots</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">quantum_function_hamiltonian_expval</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">H</span><span class="p">:</span> <span class="n">qml</span><span class="o">.</span><span class="n">Hamiltonian</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    The function `quantum_function_expval` applies quantum operations RZ, CNOT, and RY to qubits and returns</span>
-<span class="sd">    the expectation value of PauliZ on the second qubit.</span>
-
-<span class="sd">    :param x: The parameter `x` in the `quantum_function_expval` represents the angle for the rotation gate</span>
-<span class="sd">    `RZ` applied on the qubit at wire 0</span>
-<span class="sd">    :param y: The parameter `y` in the `quantum_function_expval` function is used as the angle parameter for</span>
-<span class="sd">    the rotation gate `RY(y, wires=1)`. This gate applies a rotation around the y-axis of the Bloch</span>
-<span class="sd">    sphere by an angle `y` to the qubit on wire</span>
-<span class="sd">    :return: The function `quantum_function_expval` returns the expected value of a given operator</span>
-<span class="sd">    :H: Pennylane Hamiltonian object</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">arbitrary_quantum_circuit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">RZ</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">qml</span><span class="o">.</span><span class="n">expval</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
 
@@ -750,21 +740,91 @@ Furthermore, you can define a Hamiltonian object within PennyLane, and calculate
 <span class="n">hamiltonian</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">Hamiltonian</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">obs</span><span class="p">)</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">quantum_function_hamiltonian_expval</span><span class="p">(</span><span class="o">*</span><span class="n">params</span><span class="p">,</span> <span class="n">hamiltonian</span><span class="p">)</span>
 </code></pre></div>
-<p>If you are just interested in accessing the counts, you can also use</p>
+<p>If you are just interested in accessing the counts (or probabilities), you can also use</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pennylane</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">qml</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pennylane</span><span class="w"> </span><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">mqss.pennylane_adapter.device</span><span class="w"> </span><span class="kn">import</span> <span class="n">MQSSPennylaneDevice</span>
 <span class="n">n_wires</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="n">dev_hamiltonian</span> <span class="o">=</span> <span class="n">MQSSPennylaneDevice</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="n">n_wires</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s1">&#39;&lt;MQSS_TOKEN&gt;&#39;</span><span class="p">,</span> <span class="n">backends</span><span class="o">=</span><span class="s1">&#39;&lt;MQSS_BACKENDS&gt;&#39;</span><span class="p">)</span>
-<span class="nd">@qml</span><span class="o">.</span><span class="n">qnode</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span>
+<span class="n">dev</span> <span class="o">=</span> <span class="n">MQSSPennylaneDevice</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="n">n_wires</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s1">&#39;&lt;MQSS_TOKEN&gt;&#39;</span><span class="p">,</span> <span class="n">backends</span><span class="o">=</span><span class="s1">&#39;&lt;MQSS_BACKENDS&gt;&#39;</span><span class="p">)</span>
+<span class="nd">@qml</span><span class="o">.</span><span class="n">qnode</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span> <span class="n">shots</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">circuit</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 
-    <span class="n">arbitrary_quantum_circuit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">qml</span><span class="o">.</span><span class="n">probs</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_wires</span><span class="p">))</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">RZ</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">qml</span><span class="o">.</span><span class="n">probs</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">probs</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
 </code></pre></div>
+<p>With the latest release (1.2.0), it is also possible to run high level PennyLane native quantum operations using the MQSS backends, such as <code>FermionicDoubleExcitation</code>:
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">build_h2_problem</span><span class="p">():</span>
+    <span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">]</span>
+    <span class="n">geometry</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.735</span><span class="p">],</span>
+        <span class="p">],</span>
+        <span class="n">requires_grad</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">qchem</span><span class="o">.</span><span class="n">Molecule</span><span class="p">(</span>
+        <span class="n">symbols</span><span class="p">,</span> <span class="n">geometry</span><span class="p">,</span> <span class="n">charge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">mult</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">basis_name</span><span class="o">=</span><span class="s2">&quot;sto-3g&quot;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;Angstrom&quot;</span>
+    <span class="p">)</span>
+    <span class="n">H</span><span class="p">,</span> <span class="n">n_qubits</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">qchem</span><span class="o">.</span><span class="n">molecular_hamiltonian</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;dhf&quot;</span><span class="p">)</span>
+    <span class="n">n_electrons</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">hf_state</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">qchem</span><span class="o">.</span><span class="n">hf_state</span><span class="p">(</span><span class="n">n_electrons</span><span class="p">,</span> <span class="n">n_qubits</span><span class="p">)</span>
+    <span class="n">singles</span><span class="p">,</span> <span class="n">doubles</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">qchem</span><span class="o">.</span><span class="n">excitations</span><span class="p">(</span><span class="n">n_electrons</span><span class="p">,</span> <span class="n">n_qubits</span><span class="p">)</span>
+    <span class="n">s_wires</span><span class="p">,</span> <span class="n">d_wires</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">qchem</span><span class="o">.</span><span class="n">excitations_to_wires</span><span class="p">(</span><span class="n">singles</span><span class="p">,</span> <span class="n">doubles</span><span class="p">)</span>
+    <span class="n">n_params</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">singles</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">doubles</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">H</span><span class="p">,</span> <span class="n">n_qubits</span><span class="p">,</span> <span class="n">hf_state</span><span class="p">,</span> <span class="n">s_wires</span><span class="p">,</span> <span class="n">d_wires</span><span class="p">,</span> <span class="n">n_params</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">make_ansatz</span><span class="p">(</span><span class="n">hf_state</span><span class="p">,</span> <span class="n">s_wires</span><span class="p">,</span> <span class="n">d_wires</span><span class="p">,</span> <span class="n">n_qubits</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ansatz</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+        <span class="n">qml</span><span class="o">.</span><span class="n">UCCSD</span><span class="p">(</span>
+            <span class="n">weights</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span>
+            <span class="n">wires</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">),</span>
+            <span class="n">s_wires</span><span class="o">=</span><span class="n">s_wires</span><span class="p">,</span>
+            <span class="n">d_wires</span><span class="o">=</span><span class="n">d_wires</span><span class="p">,</span>
+            <span class="n">init_state</span><span class="o">=</span><span class="n">hf_state</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ansatz</span>
+
+<span class="n">H</span><span class="p">,</span> <span class="n">n_qubits</span><span class="p">,</span> <span class="n">hf_state</span><span class="p">,</span> <span class="n">s_wires</span><span class="p">,</span> <span class="n">d_wires</span><span class="p">,</span> <span class="n">n_params</span> <span class="o">=</span> <span class="n">build_h2_problem</span><span class="p">()</span>
+<span class="n">ansatz</span> <span class="o">=</span> <span class="n">make_ansatz</span><span class="p">(</span><span class="n">hf_state</span><span class="p">,</span> <span class="n">s_wires</span><span class="p">,</span> <span class="n">d_wires</span><span class="p">,</span> <span class="n">n_qubits</span><span class="p">)</span>
+
+<span class="nd">@qml</span><span class="o">.</span><span class="n">qnode</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">energy_backend</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="n">ansatz</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">qml</span><span class="o">.</span><span class="n">expval</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+
+<span class="n">theta_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_params</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;backend energy:&quot;</span><span class="p">,</span> <span class="n">energy_backend</span><span class="p">(</span><span class="n">theta_test</span><span class="p">))</span>
+</code></pre></div></p>
+<h2 id="inspecting-the-quantum-circuit">🧪 Inspecting the Quantum Circuit<a class="headerlink" href="#inspecting-the-quantum-circuit" title="Permanent link">&para;</a></h2>
+<p>It is possible to use PennyLane’s <code>specs</code> method to inspect details about a quantum circuit:</p>
+<div class="highlight"><pre><span></span><code><span class="n">_</span> <span class="o">=</span> <span class="n">quantum_function_expval</span><span class="p">(</span><span class="o">*</span><span class="n">params</span><span class="p">)</span>
+
+<span class="n">resources</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">specs</span><span class="p">(</span><span class="n">quantum_function_expval</span><span class="p">)(</span><span class="o">*</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">resources</span>
+<span class="n">simulator_resources</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">specs</span><span class="p">(</span><span class="n">quantum_function_expval_simulator</span><span class="p">)(</span>
+    <span class="o">*</span><span class="n">params</span>
+<span class="p">)</span><span class="o">.</span><span class="n">resources</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">resources</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Output:</strong>
+<div class="highlight"><pre><span></span><code>Total wire allocations: 4
+Total gates: 4
+Circuit depth: 4
+
+Gate types:
+  BasisState: 1
+  FermionicDoubleExcitation: 1
+  FermionicSingleExcitation: 2
+
+Measurements:
+  expval(Sum(num_wires=4, num_terms=15)): 1
+</code></pre></div></p>
 <h2 id="upcoming-features">🛠️ Upcoming Features<a class="headerlink" href="#upcoming-features" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Autograd support with parameter-shift</li>
