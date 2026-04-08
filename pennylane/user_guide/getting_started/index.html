@@ -372,6 +372,48 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="🚀 Job Submission with different measurement types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#expectation-values-using-pauli-observables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expectation Values using Pauli Observables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expectation-values-using-hamiltonians" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expectation Values using Hamiltonians
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probabilities-counts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Probabilities (Counts)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list-of-observables" class="md-nav__link">
+    <span class="md-ellipsis">
+      List of Observables
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -632,6 +674,48 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="🚀 Job Submission with different measurement types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#expectation-values-using-pauli-observables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expectation Values using Pauli Observables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expectation-values-using-hamiltonians" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expectation Values using Hamiltonians
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probabilities-counts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Probabilities (Counts)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list-of-observables" class="md-nav__link">
+    <span class="md-ellipsis">
+      List of Observables
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -685,7 +769,9 @@ The users would be able to use various PennyLane functions, such as <a href="htt
 <div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>mqss-pennylane-adapter
 </code></pre></div></p>
 <h2 id="job-submission-with-different-measurement-types">🚀 Job Submission with different measurement types<a class="headerlink" href="#job-submission-with-different-measurement-types" title="Permanent link">&para;</a></h2>
-<p>MQSS PennyLane Provider has support for most of the native PennyLane features. For instance, you can define a quantum circuit using PennyLane quantum gates, and decorate the method with the MQSSPennylaneDevice object. Parametric gates can also be used. 
+<p>MQSS PennyLane Provider has support for most of the native PennyLane features. For instance, you can define a quantum circuit using PennyLane quantum gates, and decorate the method with the MQSSPennylaneDevice object. Parametric gates can also be used. </p>
+<h3 id="expectation-values-using-pauli-observables">Expectation Values using Pauli Observables<a class="headerlink" href="#expectation-values-using-pauli-observables" title="Permanent link">&para;</a></h3>
+<p>It is possible to define any Pauli word using the keywords  <code>qml.PauliX</code>, <code>qml.PauliY</code> or <code>qml.PauliZ</code> and highlight which qubit each Pauli acts on, to calculate the expectation value with respect to that observable, same way it is done with PennyLane default devices.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pennylane</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">qml</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pennylane</span><span class="w"> </span><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">mqss.pennylane_adapter.device</span><span class="w"> </span><span class="kn">import</span> <span class="n">MQSSPennylaneDevice</span>
@@ -712,7 +798,8 @@ The users would be able to use various PennyLane functions, such as <a href="htt
 <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">17</span><span class="p">]</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">quantum_function_expval</span><span class="p">(</span><span class="o">*</span><span class="n">params</span><span class="p">)</span>
 </code></pre></div>
-Furthermore, you can define a Hamiltonian object within PennyLane, and calculate the expectation value with respect to that Hamiltonian. For these cases, Pennylane Provider simply creates a batch job for each term in the Hamiltonian, to calculate the expectation value.</p>
+<h3 id="expectation-values-using-hamiltonians">Expectation Values using Hamiltonians<a class="headerlink" href="#expectation-values-using-hamiltonians" title="Permanent link">&para;</a></h3>
+<p>Furthermore, you can define a Hamiltonian object within PennyLane, and calculate the expectation value with respect to that Hamiltonian. For these cases, Pennylane Provider simply creates a batch job for each term in the Hamiltonian, to calculate the expectation value.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pennylane</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">qml</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pennylane</span><span class="w"> </span><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">mqss.pennylane_adapter.device</span><span class="w"> </span><span class="kn">import</span> <span class="n">MQSSPennylaneDevice</span>
@@ -740,6 +827,7 @@ Furthermore, you can define a Hamiltonian object within PennyLane, and calculate
 <span class="n">hamiltonian</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">Hamiltonian</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">obs</span><span class="p">)</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">quantum_function_hamiltonian_expval</span><span class="p">(</span><span class="o">*</span><span class="n">params</span><span class="p">,</span> <span class="n">hamiltonian</span><span class="p">)</span>
 </code></pre></div>
+<h3 id="probabilities-counts">Probabilities (Counts)<a class="headerlink" href="#probabilities-counts" title="Permanent link">&para;</a></h3>
 <p>If you are just interested in accessing the counts (or probabilities), you can also use</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pennylane</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">qml</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pennylane</span><span class="w"> </span><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
@@ -756,7 +844,32 @@ Furthermore, you can define a Hamiltonian object within PennyLane, and calculate
     <span class="n">qml</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">qml</span><span class="o">.</span><span class="n">probs</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">probs</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
 </code></pre></div>
-<p>With the latest release (1.2.0), it is also possible to run high level PennyLane native quantum operations using the MQSS backends, such as <code>FermionicDoubleExcitation</code>:
+<h3 id="list-of-observables">List of Observables<a class="headerlink" href="#list-of-observables" title="Permanent link">&para;</a></h3>
+<p>In specific routines, you might require multiple measurement results based on a different combination of Pauli words. Different operators might also act on the same qubit. The return statement has to be defined as a list of expectation value combinations as follows:
+<div class="highlight"><pre><span></span><code><span class="n">observables</span> <span class="o">=</span> <span class="p">[</span><span class="n">qml</span><span class="o">.</span><span class="n">PauliZ</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">qml</span><span class="o">.</span><span class="n">PauliX</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">qml</span><span class="o">.</span><span class="n">PauliZ</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">@</span> <span class="n">qml</span><span class="o">.</span><span class="n">PauliZ</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+
+<span class="nd">@qml</span><span class="o">.</span><span class="n">qnode</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">quantum_function_expval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines an arbitrary mock quantum circuit for testing purposes, with an expectation value measurement</span>
+
+<span class="sd">    :param x: The parameter `x` represents the angle for the rotation gate</span>
+<span class="sd">    `RZ` applied on the qubit at wire 0</span>
+<span class="sd">    :param y: The parameter `y` represents the angle parameter for</span>
+<span class="sd">    the rotation gate `RY` at wire 1.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">RZ</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">RX</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">qml</span><span class="o">.</span><span class="n">expval</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span> <span class="k">for</span> <span class="n">obs</span> <span class="ow">in</span> <span class="n">observables</span><span class="p">]</span>
+</code></pre></div></p>
+<p>In such cases, the output is also a list, corresponding to the expectation value of each term. For instance, for the case above, the output is as follows:</p>
+<p><strong>Output:</strong>
+<div class="highlight"><pre><span></span><code>[tensor(0.75976562, requires_grad=True), tensor(0.0625, requires_grad=True), tensor(0.96679688, requires_grad=True)]
+</code></pre></div></p>
+<p>With the latest release (1.2.1), it is also possible to run high level PennyLane native quantum operations using the MQSS backends, such as <code>FermionicDoubleExcitation</code>:
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">build_h2_problem</span><span class="p">():</span>
     <span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">]</span>
     <span class="n">geometry</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
