@@ -415,9 +415,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#publishing-documentation-on-github-pages" class="md-nav__link">
+  <a href="#publishing-documentation-on-github-pages-and-viewing-it-locally" class="md-nav__link">
     <span class="md-ellipsis">
-      Publishing Documentation on GitHub Pages
+      Publishing Documentation on GitHub Pages and Viewing it Locally
     </span>
   </a>
   
@@ -653,9 +653,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#publishing-documentation-on-github-pages" class="md-nav__link">
+  <a href="#publishing-documentation-on-github-pages-and-viewing-it-locally" class="md-nav__link">
     <span class="md-ellipsis">
-      Publishing Documentation on GitHub Pages
+      Publishing Documentation on GitHub Pages and Viewing it Locally
     </span>
   </a>
   
@@ -693,32 +693,28 @@
 </ul>
 <h2 id="setting-up-the-development-environment">Setting Up the Development Environment<a class="headerlink" href="#setting-up-the-development-environment" title="Permanent link">&para;</a></h2>
 <p><strong>Clone the repository:</strong></p>
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Munich-Quantum-Software-Stack/MQP-Qiskit-Provider.git
-<span class="nb">cd</span><span class="w"> </span>MQP-Qiskit-Provider
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:Munich-Quantum-Software-Stack/MQSS-Pennylane-Adapter.git
+<span class="nb">cd</span><span class="w"> </span>MQSS-Pennylane-Adapter
 </code></pre></div>
 <p><strong>Create a virtual environment and install the dependencies:</strong></p>
-<div class="highlight"><pre><span></span><code>pdm<span class="w"> </span>install
-</code></pre></div>
+<p>You can create the virtual environment through <code>uv sync</code>. <code>--all-groups</code> option lets you install development dependencies as well.
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>sync<span class="w"> </span>--all-groups
+</code></pre></div></p>
 <h2 id="running-tests">Running Tests<a class="headerlink" href="#running-tests" title="Permanent link">&para;</a></h2>
-<p>To run the tests, use <code>pytest</code>:</p>
-<div class="highlight"><pre><span></span><code>pdm<span class="w"> </span>run<span class="w"> </span>pytest
+<p>To run the tests, use <code>pytest</code> through <code>uv</code>:</p>
+<p><div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>pytest
 </code></pre></div>
-<h2 id="publishing-documentation-on-github-pages">Publishing Documentation on GitHub Pages<a class="headerlink" href="#publishing-documentation-on-github-pages" title="Permanent link">&para;</a></h2>
-<p>To publish the documentation on GitHub Pages, follow these steps:</p>
-<p><strong>Install MkDocs and the Material theme:</strong></p>
-<div class="highlight"><pre><span></span><code>pdm<span class="w"> </span>install<span class="w"> </span>-G<span class="w"> </span>docs
+some useful flags are:
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>-s<span class="w"> </span><span class="c1"># Shows print statements in the terminal directly.</span>
+uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>-m<span class="w"> </span><span class="c1"># Runs only the mock tests </span>
+uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>--maxfail<span class="o">=</span>&lt;N&gt;<span class="w"> </span><span class="c1"># Allows N failures, can be useful for live testing.</span>
+uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>--pdb<span class="w"> </span><span class="c1"># Goes into debug mode once a test fails.</span>
+</code></pre></div></p>
+<h2 id="publishing-documentation-on-github-pages-and-viewing-it-locally">Publishing Documentation on GitHub Pages and Viewing it Locally<a class="headerlink" href="#publishing-documentation-on-github-pages-and-viewing-it-locally" title="Permanent link">&para;</a></h2>
+<p>The documentation is published to GitHub Pages, after every succesful PR merged to main. To update it locally at <a href="http://localhost:8000">http://localhost:8000</a>, you can run:</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>mkdocs<span class="w"> </span>build
+uv<span class="w"> </span>run<span class="w"> </span>mkdocs<span class="w"> </span>serve
 </code></pre></div>
-<p><strong>Build the documentation:</strong></p>
-<div class="highlight"><pre><span></span><code>pdm<span class="w"> </span>run<span class="w"> </span>mkdocs<span class="w"> </span>build
-</code></pre></div>
-<p><strong>View documentation locally</strong></p>
-<p>Run the following and browse the documentation locally at: <a href="http://localhost:8000">http://localhost:8000</a></p>
-<div class="highlight"><pre><span></span><code>pdm<span class="w"> </span>run<span class="w"> </span>mkdocs<span class="w"> </span>serve
-</code></pre></div>
-<p><strong>Deploy the documentation to GitHub Pages:</strong></p>
-<div class="highlight"><pre><span></span><code>pdm<span class="w"> </span>run<span class="w"> </span>mkdocs<span class="w"> </span>gh-deploy<span class="w"> </span>--remote-name<span class="w"> </span>git@github.com:Munich-Quantum-Software-Stack/MQP-Qiskit-Provider-Documentation.git<span class="w"> </span>--remote-branch<span class="w"> </span>gh-pages
-</code></pre></div>
-<p>This will create a new branch named <code>gh-pages</code> in your repository and deploy the documentation to GitHub Pages.</p>
 
 
 
