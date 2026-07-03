@@ -868,7 +868,7 @@ execute(self, circuits, execution_config, shots):
 
 
 <a href="#mqss.pennylane_adapter.device.MQSSPennylaneDevice.__init__" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__init__</span><span class="p">(</span><span class="nf">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">backends</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">supports_derivatives</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="fm">__init__</span><span class="p">(</span><span class="nf">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">backends</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">use_commuting_measurement_grouping</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">supports_derivatives</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -981,6 +981,22 @@ execute(self, circuits, execution_config, shots):
             </td>
             <td>
                   <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>use_commuting_measurement_grouping</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Boolean flag to indicate whether to use commuting measurement grouping for Hamiltonian expectation value calculation. Defaults to True.</p>
+              </div>
+            </td>
+            <td>
+                  <code>True</code>
             </td>
           </tr>
       </tbody>
