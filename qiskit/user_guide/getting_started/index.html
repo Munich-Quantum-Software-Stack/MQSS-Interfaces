@@ -466,6 +466,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#select-physical-qubits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Select Physical Qubits
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#checking-the-number-of-pending-jobs-on-a-backend" class="md-nav__link">
     <span class="md-ellipsis">
       Checking the Number of Pending Jobs on a Backend
@@ -514,6 +523,15 @@
   <a href="#timestamps-for-job-execution" class="md-nav__link">
     <span class="md-ellipsis">
       Timestamps for Job Execution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mid-circuit-measurements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mid-Circuit Measurements
     </span>
   </a>
   
@@ -848,6 +866,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#select-physical-qubits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Select Physical Qubits
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#checking-the-number-of-pending-jobs-on-a-backend" class="md-nav__link">
     <span class="md-ellipsis">
       Checking the Number of Pending Jobs on a Backend
@@ -896,6 +923,15 @@
   <a href="#timestamps-for-job-execution" class="md-nav__link">
     <span class="md-ellipsis">
       Timestamps for Job Execution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mid-circuit-measurements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mid-Circuit Measurements
     </span>
   </a>
   
@@ -989,6 +1025,23 @@ the backend.</p>
 <span class="n">transpiled_circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">transpile</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">optimization_level</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transpiled_circuit</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">no_modify</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
+<h3 id="select-physical-qubits">Select Physical Qubits<a class="headerlink" href="#select-physical-qubits" title="Permanent link">&para;</a></h3>
+<p>To choose which physical qubits execute a circuit, provide an <code>initial_layout</code> when transpiling. The
+list position is the virtual circuit qubit, and the value is the physical backend qubit. For
+example, this maps circuit qubit 0 to physical qubit 3 and circuit qubit 1 to physical qubit 5:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit</span><span class="w"> </span><span class="kn">import</span> <span class="n">transpile</span>
+
+<span class="n">transpiled_circuit</span> <span class="o">=</span> <span class="n">transpile</span><span class="p">(</span>
+  <span class="n">circuit</span><span class="p">,</span>
+  <span class="n">backend</span><span class="p">,</span>
+  <span class="n">initial_layout</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+  <span class="n">optimization_level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transpiled_circuit</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">no_modify</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<p>Use <code>no_modify=True</code> to prevent server-side transpilation from changing the selected mapping. If the
+selected physical qubits are not directly connected in the backend topology, Qiskit may insert SWAP
+operations. You can inspect the resulting mapping with <code>print(transpiled_circuit.layout)</code>.</p>
 <h3 id="checking-the-number-of-pending-jobs-on-a-backend">Checking the Number of Pending Jobs on a Backend<a class="headerlink" href="#checking-the-number-of-pending-jobs-on-a-backend" title="Permanent link">&para;</a></h3>
 <p>To determine if a backend is overloaded, you can check the number of pending jobs using the
 <code>num_pending_jobs</code> property.</p>
@@ -1025,6 +1078,25 @@ QUEUED, INITIALIZING, DONE).</p>
 <span class="nb">print</span><span class="p">(</span><span class="n">result_dict</span><span class="p">[</span><span class="s2">&quot;timestamps&quot;</span><span class="p">][</span><span class="s2">&quot;scheduled&quot;</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result_dict</span><span class="p">[</span><span class="s2">&quot;timestamps&quot;</span><span class="p">][</span><span class="s2">&quot;completed&quot;</span><span class="p">])</span>
 </code></pre></div>
+<h3 id="mid-circuit-measurements">Mid-Circuit Measurements<a class="headerlink" href="#mid-circuit-measurements" title="Permanent link">&para;</a></h3>
+<p>A classical measurement can control a later operation in the same circuit:</p>
+<div class="highlight"><pre><span></span><code><span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Store the mid-circuit result in c0</span>
+
+<span class="k">with</span> <span class="n">circuit</span><span class="o">.</span><span class="n">if_test</span><span class="p">((</span><span class="n">circuit</span><span class="o">.</span><span class="n">clbits</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">True</span><span class="p">)):</span>
+  <span class="n">circuit</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Apply X only when c0 is 1</span>
+
+<span class="n">circuit</span><span class="o">.</span><span class="n">measure_all</span><span class="p">()</span>  <span class="c1"># Store the final result in a new bit, c1</span>
+</code></pre></div>
+<p>Qiskit displays classical bits from highest to lowest index, so the output is <code>c1 c0</code>: the left bit
+is the final measurement and the right bit is the mid-circuit measurement. For example:</p>
+<ul>
+<li><code>0 0</code>: the mid-circuit result was 0, so no X was applied; the final result was 0.</li>
+<li><code>0 1</code>: the mid-circuit result was 1, so X was applied; the final result was 0.</li>
+</ul>
+<p>An example result from 100 shots is <code>{'0 0': 54, '0 1': 40, '1 1': 6}</code>. The additional <code>1 1</code> results
+can be caused by noise or measurement errors on a real backend.</p>
 
 
 
